@@ -4,7 +4,11 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-    return render(request, 'tasks/index.html')
+    tasks = Task.objects.all()
+    template = loader.get_template('tasks/index.html')
+    context = {'tasks': tasks,}
+    return HttpResponse(template.render(context, request))
     
-def say_whatsup(request):
-    return HttpResponse("Hello, WHAT IS UP?")
+# def create(request, request.session['username']):
+#     var current_user = request.session['username]
+    
