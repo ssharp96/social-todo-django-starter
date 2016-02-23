@@ -1,0 +1,28 @@
+<html>
+<body style="background-image: url(&quot;http://theartmad.com/wp-content/uploads/Blue-Grey-Gradient-Background-6.jpg&quot;);">
+
+<h1 style = "color:white">Social-Todo 2</h1>
+<form method="POST", action="/login_view/">
+    <h1 style = "color:white">Login!</h1>
+    {% csrf_token %}
+    <label for="email" style = "color:white">Email</label>
+    <input name="email" type="text"><br>
+    <label for="password" style = "color:white">Password</label>
+    <input name="password" type="password"><br>
+    <input type="submit"  class="log-in-submit">
+</form>
+<form method="POST" action="/register_view/">
+    <h1 style = "color:white">Register!</h1>
+    {% csrf_token %}
+    <label for="name" style = "color:white">Name</label>
+    <input name="name" type="text"><br>
+    <label for="email" style = "color:white">Email</label>
+    <input name="email" type="text"><br>
+    <label for="password" style = "color:white">Password</label>
+    <input name="password" type="password"><br>
+    <label for="confirm_password" style = "color:white">Confirm Password</label>
+    <input name="confirm_password" type="password"><br>
+    <input type="submit"  class="log-in-submit">
+</form>
+
+</html>
