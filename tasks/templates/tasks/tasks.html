@@ -1,0 +1,61 @@
+<html>
+<body style="background-image: url(&quot;http://theartmad.com/wp-content/uploads/Blue-Grey-Gradient-Background-6.jpg&quot;);">
+
+<h1 style = "color:white">Welcome, {{ user.first_name }}!</h1>
+
+<ul>
+    {% for task in context.tasks %}
+        {% if task.is_complete %}
+            <li>
+                <span style = "color:white">{{ task.title }}<b> COMPLETE!</b></span>
+                <p style = "color:white">{{ task.description }}</p>
+            </li>
+                <form method="POST" action="/tasks/delete/{{ task.id }}">
+                    {% csrf_token %}
+                    <input type="submit" name="delete-task" class="delete-task" value="Delete">
+                </form>
+            <form method="POST" action="/tasks/toggle/{{ task.id }}">
+                {% csrf_token %}
+                <input type="submit" name="toggle-task" class="toggle-task" value="Mark Complete">
+            </form>
+        {% else %}
+            <li>
+                <span style = "color:white">{{ task.title }}</span>
+                <p style = "color:white">{{ task.description }}</p>
+            </li>
+            
+                <form method="POST" action="/tasks/delete/{{ task.id }}">
+                    {% csrf_token %}
+                    <input type="submit" name="delete-task" class="delete-task" value="Delete">
+                </form>
+               
+            <form method="POST" action="/tasks/toggle/{{ task.id }}">
+                {% csrf_token %}
+                <input type="submit" name="toggle-task" class="toggle-task" value="Mark Complete">
+            </form>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+
+<h3 style = "color:white">New Task</h3>
+<form method='POST' action='/tasks/create/'>
+    {% csrf_token %}
+    <label for="title" style = "color:white">Title</label><br>
+    <input name="title" type="text"><br>
+    <label for="description" style = "color:white">Description</label><br>
+    <input name="description" type="text"><br>
+    <label for="collaborators" style = "color:white">Collaborators</label><br>
+    <input name="collaborators1" type="text"><br>
+    <input name="collaborators2" type="text"><br>
+    <input name="collaborators3" type="text"><br>
+    <input type="submit"  class="log-in-submit">
+</form>
+
+<form method="get" action="/logout_view">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
+</body>
+</html>
