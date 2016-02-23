@@ -6,7 +6,7 @@ from tasks.models import *
 
 # Create your views here.
 
-def index(request):
+def tasks(request):
     tasks = Task.objects.all()
     current_user = request.user
     # tasks[] = 
@@ -15,10 +15,11 @@ def index(request):
             
         
     if current_user.is_authenticated():
-        template = loader.get_template('tasks/index.html')
+        template = loader.get_template('tasks/tasks.html')
         context = {'tasks': tasks}
-        return render(request, "tasks/index.html", {'context': context})
+        return render(request, "tasks/tasks.html", {'context': context})
     else:
+        print("what the fuck am i doing here?")
         return HttpResponseRedirect('/')
     
 # def create(request):
