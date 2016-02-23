@@ -35,27 +35,30 @@ def create(request):
         owner = user
         title = request.POST['title']
         description = request.POST['description']
-        collab_emails = []
-        print("gets here 1")
-        collab_emails.append(request.POST['collaborators1'].lower())
-        collab_emails.append(request.POST['collaborators2'].lower())
-        collab_emails.append(request.POST['collaborators3'].lower())
-        print("gets here 2")
-        collaborators = []
-        print("gets here 3")
-        # 1. Grab the collaborator emails addresses from the submitted form
-        # 2. turn them into lowercase
-        # 3. Look up all Users that have those email addresses
-        # 4. For those that are found, make them collaborators on this new task
-        # 5. Save the task
+        # email1 = request.POST['collaborators1']
+        # collab1 = User.objects.get(email=email1)
+        # task.collaborators.add(collab1)
+        # collab_emails = []
+        # print("gets here 1")
+        # collab_emails.append(request.POST['collaborators1'].lower())
+        # collab_emails.append(request.POST['collaborators2'].lower())
+        # collab_emails.append(request.POST['collaborators3'].lower())
+        # print("gets here 2")
+        # collaborators = []
+        # print("gets here 3")
+        # # 1. Grab the collaborator emails addresses from the submitted form
+        # # 2. turn them into lowercase
+        # # 3. Look up all Users that have those email addresses
+        # # 4. For those that are found, make them collaborators on this new task
+        # # 5. Save the task
         
         is_complete = False
         task = Task(owner=owner, title=title, description=description, is_complete=False)
         if task is not None:
             task.save()
-            for email in collab_emails:
-                collab = User.objects.get(email=email)
-                task.collaborators.add(collab)
+        #     for email in collab_emails:
+        #         collab = User.objects.get(email=email)
+        #         task.collaborators.add(collab)
             return HttpResponseRedirect('/tasks/')
         else:
             return render(request, 'tasks/tasks.html', {'errors':"Make sure you fill in all forms!"})
